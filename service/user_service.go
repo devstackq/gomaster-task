@@ -1,6 +1,7 @@
 package service
 
 import (
+	"log"
 	"net/http"
 	"time"
 
@@ -26,9 +27,26 @@ func (us *UserService) CreateUser(user models.User) (int, error) {
 		return http.StatusInternalServerError, err
 	}
 	user.CreatedTime = time.Now()
-	user.ID = uuid
+	user.UUID = uuid
 	//if ok -> query db
 	us.repository.CreateUser(user)
+	log.Print(user, 2)
+	return 200, nil
+}
 
+func (us *UserService) GetUserById(id int) (*models.User, int, error) {
+	//valid params todo:
+	user, err := us.repository.GetUserById(id)
+	if err != nil {
+		return nil, 500, err
+	}
+	return user, 200, nil
+}
+
+func (us *UserService) UpdateUserByUUID(user *models.User) (int, error) {
+	err := us.repository.UpdateUserByUUID(user)
+	if err != nil {
+		return 500, err
+	}
 	return 200, nil
 }

@@ -4,7 +4,8 @@ import "time"
 
 //entity
 type User struct {
-	ID          string    `json:"uuid"`
+	ID          int       `json:"id"`
+	UUID        string    `json:"uuid"`
 	FirstName   string    `json:"firstname"`
 	LastName    string    `json:"lastname"`
 	Email       string    `json:"email"`

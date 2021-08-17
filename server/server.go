@@ -20,7 +20,7 @@ func NewServer() *Server {
 	if err != nil {
 		log.Println(err, "err create tables")
 	}
-	defer db.Close()
+	// defer db.Close()
 	//chain interface relation between layer -> repos->services->handlers
 	//outer layer connect -> inner - with interfaces, then realize interfaces
 	repos := repository.NewRepository(db)

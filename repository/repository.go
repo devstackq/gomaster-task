@@ -9,6 +9,8 @@ import (
 //use cases, interface - for relaition layer
 type User interface {
 	CreateUser(models.User) error
+	GetUserById(int) (*models.User, error)
+	UpdateUserByUUID(*models.User) error
 }
 
 type Repository struct {

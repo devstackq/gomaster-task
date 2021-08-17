@@ -8,6 +8,8 @@ import (
 //business logic
 type User interface {
 	CreateUser(models.User) (int, error)
+	GetUserById(int) (*models.User, int, error)
+	UpdateUserByUUID(*models.User) (int, error)
 }
 
 type Service struct {
