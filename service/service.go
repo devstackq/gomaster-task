@@ -5,9 +5,9 @@ import (
 	"github.com/devstackq/repository"
 )
 
-//bussynnes logic
+//business logic
 type User interface {
-	CreateUser(models.User) error
+	CreateUser(models.User) (int, error)
 }
 
 type Service struct {

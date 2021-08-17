@@ -16,13 +16,13 @@ type Server struct {
 }
 
 func NewServer() *Server {
-	db, err := repository.CreateDB("postgres", "./user.db")
+	db, err := repository.CreateDB()
 	if err != nil {
 		log.Println(err, "err create tables")
 	}
+	defer db.Close()
 	//chain interface relation between layer -> repos->services->handlers
 	//outer layer connect -> inner - with interfaces, then realize interfaces
-
 	repos := repository.NewRepository(db)
 	services := service.NewService(repos)
 	handler := handler.NewHandler(services)
@@ -31,7 +31,6 @@ func NewServer() *Server {
 	if port == "" {
 		port = ":8081"
 	}
-
 	//custom server
 	s := &Server{
 		http: &http.Server{
